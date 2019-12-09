@@ -1,43 +1,32 @@
-const pricesJson = require("./prices.json");
+const fs = require('fs');
 
-const calculateSalary = (schedule) => {
+const { calculateSalary } = require('./operations');
+
+const contents = fs.readFileSync('salaries.txt', 'utf8');
+
+const salaries = contents.split(/\r?\n/)
+
+    const formatedSalaries = salaries.map(salary => {
+        const partsSalary = salary.split("=");
+        return {
+            user:partsSalary[0],
+            schedule:partsSalary[1]
+        }
+    })
+    
+    const calculatedSalaries = formatedSalaries.map( salary => {
+            if(!salary.schedule) return `It's an invalid set of data`
+            const schedules = salary.schedule.split(",");
+            const formatedSchedule = schedules.reduce (
+                (total,schedule) => {total[schedule.substring(0,2)] = schedule.substring(2);return total}
+                ,new Object);
+            
+            const calculatedsalary = calculateSalary(formatedSchedule);
+            return `The amount to pay ${salary.user} is: ${calculatedsalary}`;
+
+    });
+    
+calculatedSalaries.map(calculatedSalary => console.log(calculatedSalary));
 
 
-    return 215;
-}
 
-const checkDay = (day) => {
-    if(day.match(/MO|TU|WE|TH|FR/s)) return "weekday";
-    if(day.match(/SA|SU/s)) return "weekend";
-    return null;
-};
-
-const calculatePricePerDay = ({typeDay,startHour,endHour}) => {
-
-    const prices = pricesJson[typeDay];
-    let total =0;
-
-    if(!prices) return null;
-
-    schedules = Object.keys(prices);
-    const formatedSchedules = schedules.map(formatSchedule);
-
-    for(i=0;i<formatedSchedules.length;i++){
-        
-    }
-
-    console.log(formatedSchedules);
-
-    return prices;
-};
-
-formatSchedule = (schedule) => {
-    const hours = schedule.split("-");
-    return {startHour: hours[0],endHour: hours[1]}
-}
-
-module.exports = {
-    calculateSalary,
-    checkDay,
-    calculatePricePerDay
-}
