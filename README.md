@@ -70,7 +70,14 @@ __test:__ it has a set of unit test of main functions to solve the proble like: 
 __data:__ it has .json file with schedules and their prices
 The idea is try to simulate db where we can add or remove sets of data.
 
+### Process 
 
+* First,I read the .txt file and add to an array, separated by "\n"
+* Then, I separate data in user and schedule.
+* After that,I separate schedule in startHour and endHour.
+* Then, I convert hours using Date() functions.
+* Then, I compare the current schedule withe de defined schedules and return the correspondent value according .json file.
+* Finally, I return the sum of each value per day.
 
 ## Run environment
 
