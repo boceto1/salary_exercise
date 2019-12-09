@@ -1,7 +1,7 @@
 const { calculateSalary,
         checkDay,
         calculatePricePerDay 
-    } = require("./operations");
+    } = require("../src/operations");
 
 describe("calculateSalary",() => {
     let errorMock;

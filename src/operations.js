@@ -1,4 +1,4 @@
-const pricesJson = require("./prices.json");
+const pricesJson = require("../data/prices.json");
 
 
 const calculateSalary = (schedule) => {
